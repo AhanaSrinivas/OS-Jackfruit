@@ -34,7 +34,7 @@ ls -la
 *(Show project files exist)*
 
 **Screenshot 1A:** Terminal showing project directory contents (engine.c, monitor.c, Makefile, etc.)
-![alt text](image.png)
+![alt text](images/image.png)
 
 #### Step 1.3: Build Project
 ```bash
@@ -43,7 +43,7 @@ make
 *(Should compile without errors)*
 
 **Screenshot 1B:** Terminal showing successful build output ending with "All targets built successfully" or similar
-![alt text](image-1.png)
+![alt text](images/image-1.png)
 
 
 #### Step 1.4: Verify Binaries Created
@@ -54,7 +54,7 @@ file memory_hog cpu_hog io_pulse
 ```
 
 **Screenshot 1C:** Terminal showing all binaries exist with correct types. The workload binaries should be static ELF executables so they can run inside Alpine.
-![alt text](image-2.png)
+![alt text](images/image-2.png)
 
 
 #### Step 1.5: Load Kernel Module
@@ -73,7 +73,7 @@ sudo dmesg | tail -5
 - `monitor` in lsmod output
 - `/dev/container_monitor` device exists
 - Kernel message "monitor: module loaded" or similar in dmesg
-![alt text](image-3.png)
+![alt text](images/image-3.png)
 
 
 ---
@@ -102,7 +102,7 @@ ls -ld rootfs-*
 ```
 
 **Screenshot 2B:** Terminal showing three directories: rootfs-base, rootfs-alpha, rootfs-beta
-![alt text](image-4.png)
+![alt text](images/image-4.png)
 
 
 #### Step 2.3: Copy Test Workloads into Containers
@@ -114,7 +114,7 @@ ls rootfs-beta/ | grep cpu_hog
 ```
 
 **Screenshot 2C:** Terminal confirming workload binaries are in each container's rootfs
-![alt text](image-5.png)
+![alt text](images/image-5.png)
 
 
 ---
@@ -132,7 +132,7 @@ sudo taskset -c 0 ./engine supervisor ./rootfs-base
 Run this only once. If you restart the supervisor, run start commands again in the new session.
 
 **Screenshot 3A:** Terminal 1 showing supervisor startup message
-![alt text](image-7.png)
+![alt text](images/image-7.png)
 
 
 #### Step 3.3: Verify Socket Created (Open Terminal 2)
@@ -144,7 +144,7 @@ ls -l /tmp/mini_runtime.sock
 ```
 
 **Screenshot 3B:** Terminal 2 showing `/tmp/mini_runtime.sock` exists after the supervisor is running
-![alt text](image-6.png)
+![alt text](images/image-6.png)
 
 
 ---
@@ -161,7 +161,7 @@ sleep 2
 ```
 
 **Screenshot 4A:** Terminal 2 showing "start" command and "OK: started..." response
-![alt text](image-9.png)
+![alt text](images/image-9.png)
 
 
 #### Step 4.2: Start Container Beta (CPU Workload, Low Priority)
@@ -172,7 +172,7 @@ sleep 2
 ```
 
 **Screenshot 4B:** Terminal 2 showing "start" command and "OK: started..." response
-![alt text](image-10.png)
+![alt text](images/image-10.png)
 
 
 #### Step 4.3: List Containers (PS Command)
@@ -187,7 +187,7 @@ sudo ./engine ps
 - Memory limits (soft/hard MiB)
 - Log file paths
 (This demonstrates metadata tracking)
-![alt text](image-11.png)
+![alt text](images/image-11.png)
 
 
 #### Step 4.4: Check Container Logs - Alpha
@@ -204,7 +204,7 @@ If alpha is already `STATE=exited`, run this once and retry Step 4.4:
 sudo ./engine start alpha ./rootfs-alpha /memory_hog --soft-mib 48 --hard-mib 80
 sleep 3
 ```
-![alt text](image-15.png)
+![alt text](images/image-15.png)
 
 
 #### Step 4.5: Check Container Logs - Beta
@@ -230,8 +230,8 @@ sudo dmesg -w
 *(This shows live kernel messages; keep this running)*
 
 **Screenshot 4E:** Terminal 3 showing dmesg output
-![alt text](image-16.png)
-![alt text](image-17.png)
+![alt text](images/image-16.png)
+![alt text](images/image-17.png)
 
 
 ---
@@ -256,7 +256,7 @@ sudo dmesg | grep -i "SOFT LIMIT" | tail -10
 
 **Screenshot 5A (IMPORTANT - Screenshot #5 for submission):** dmesg output showing:
 `[container_monitor] SOFT LIMIT container=... pid=... rss=... limit=...`
-![alt text](image-18.png)
+![alt text](images/image-18.png)
 
 
 #### Step 5.3: Force Memory Pressure (Let Alpha Allocate More)
@@ -268,7 +268,7 @@ sudo dmesg | grep -i "HARD LIMIT" | tail -10
 
 **Screenshot 5B (IMPORTANT - Screenshot #6 for submission):** dmesg output showing:
 `[container_monitor] HARD LIMIT container=... pid=... rss=... limit=...`
-![alt text](image-19.png)
+![alt text](images/image-19.png)
 
 #### Step 5.4: Check PS Output After Kill
 ```bash
@@ -276,8 +276,8 @@ sudo ./engine ps
 ```
 
 **Screenshot 5C:** Terminal showing alpha state changed to KILLED_HARD_LIMIT
-![alt text](image-20.png)
-![alt text](image-21.png)
+![alt text](images/image-20.png)
+![alt text](images/image-21.png)
 
 
 ---
@@ -307,7 +307,7 @@ sudo ./engine ps
 ```
 
 **Screenshot 6B:** ps output showing both containers in RUNNING state but with different CPU allocation
-![alt text](image-22.png)
+![alt text](images/image-22.png)
 
 ---
 
@@ -321,7 +321,7 @@ sleep 2
 ```
 
 **Screenshot 7A:** Terminal output showing stop command accepted
-![alt text](image-23.png)
+![alt text](images/image-23.png)
 
 #### Step 7.2: Stop Container Beta
 ```bash
@@ -364,7 +364,7 @@ lsmod | grep monitor
 ```
 
 **Screenshot 7E:** Terminal confirming monitor module removed
-![alt text](image-24.png)
+![alt text](images/image-24.png)
 
 #### Step 7.7: Check Final Logs
 ```bash
@@ -374,8 +374,8 @@ cat logs/beta.log | tail -20
 ```
 
 **Screenshot 7F:** Terminal showing per-container log files with captured output
-![alt text](image-25.png)
-![alt text](image-26.png)
+![alt text](images/image-25.png)
+![alt text](images/image-26.png)
 
 #### Step 7.8: Final Kernel Log Check
 ```bash
@@ -383,7 +383,7 @@ sudo dmesg | tail -20
 ```
 
 **Screenshot 7G:** Terminal showing final dmesg entries including module unload message
-![alt text](image-27.png)
+![alt text](images/image-27.png)
 
 ---
 
