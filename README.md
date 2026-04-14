@@ -1,8 +1,8 @@
 # Supervised Multi-Container Runtime
 
 ## 1. Team Information
-* **Team Member 1:** [Your Name] - [Your SRN]
-* **Team Member 2:** [Partner Name] - [Partner SRN] *(If applicable)*
+* **Team Member 1:** Ahana Srinivas Sivaram - PES1UG24CS910
+* **Team Member 2:** Shriya SR - PES1UG24CS449
 
 ---
 
@@ -274,7 +274,7 @@ The results confirm CFS fairness enforcement through `nice` value multipliers on
 
 ---
 
-## Verification Against Project-Guide Requirements
+## Verification Against Project Requirements
 
 ✅ **All 6 Tasks Implemented:**
 - Task 1: Multi-container supervisor with namespace isolation, metadata tracking, zombie reaping
